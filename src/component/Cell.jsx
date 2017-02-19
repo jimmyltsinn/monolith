@@ -9,22 +9,34 @@ const style = {
 };
 
 const Cell = (props) => {
-  let className;
+  let className = ['cell'];
   switch (props.value) {
-    case 0: className = "zero"; break;
-    case 1: className = "one"; break;
-    case 2: className = "two"; break;
-    case 3: className = "three"; break;
-    case 4: className = "four"; break;
+    case 0: className.push('zero'); break;
+    case 1: className.push('one'); break;
+    case 2: className.push('two'); break;
+    case 3: className.push('three'); break;
+    case 4: className.push('four'); break;
   }
-  
+
+  if (props.hitable) className.push('hitable');
+
   return (
-      <div style={style} className={className}>{props.value}</div>
+    <div
+      style={style}
+      key={`cell-${props.x}-${props.y}`}
+      className={className.join(' ')}
+      onClick={props.onClick}>
+      {props.value}
+    </div>
   );
 };
 
 Cell.propTypes = {
-  value: React.PropTypes.number.isRequired
+  value: React.PropTypes.number.isRequired,
+  hitable: React.PropTypes.bool,
+  onClick: React.PropTypes.func,
+  x: React.PropTypes.number,
+  y: React.PropTypes.number,
 };
 
 export default Cell;

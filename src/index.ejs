@@ -23,23 +23,29 @@ html, body {
   background: lightblue
 }
 
-.cellchange-enter {
-  opacity: 0.01;
+.cell {
+  border: 5px transparent;
+  position: relative;
 }
 
-.cellchange-enter.cellchange-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
+.hitable::before,
+.hitable::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-color: transparent;
+    border-style: solid;
 }
 
-.cellchange-leave {
-  opacity: 1;
+.hitable::after {
+    border-width: 8px;
+    border-right-color: #F00;
+    border-top-color: #F00;
 }
 
-.cellchange-leave.cellchange-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
+ }
+
 </style>
 
   <head>
