@@ -19,9 +19,9 @@ export let hitValid = (board, y, x) => {
 };
 
 export let hitAt = (inBoard, y, x) => {
-  let board = Object.assign({}, inBoard);
+  let board = inBoard.slice();
 
-  if (!hitValid(board, y, x)) return board;
+  if (!hitValid(board, y, x)) return null;
   let vec = [[0, 1], [0, -1], [1, 0], [-1, 0]];
   let val = board[y][x];
   let l = [{x, y}];

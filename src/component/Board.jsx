@@ -5,7 +5,8 @@ import Cell from './Cell';
 import fetch from '../game/fetchBoard';
 
 import config from '../game/config';
-import * as Game from '../game/game';
+import * as game from '../game/game';
+import * as noai from '../game/noai';
 
 const style = {
   table: {
@@ -36,8 +37,17 @@ class Board extends React.Component {
         line.push(<Cell
           key={`${i}-${j}`}
           value={this.state.board[i][j]}
-          hitable={Game.hitValid(this.state.board, i, j)}
-          onClick={() => this.setState(Game.hitAt(this.state.board, i, j))}
+          hitable={game.hitValid(this.state.board, i, j)}
+          onClick={() => {
+            let ret = game.hitAt(this.state.board, i, j);
+            if (ret) {
+              this.setState({
+                board: ret
+              });
+            } else {
+              // alert('Invalid hit');
+            }
+          }}
           x={j}
           y={i}/>
         );
@@ -48,7 +58,14 @@ class Board extends React.Component {
     return (
       <div>
         <div style={style.table}>{board}</div>
-        <div>Cell left: {Game.cellLeft(this.state.board)}</div>
+        <div>Cell left: {game.cellLeft(this.state.board)}</div>
+        <div><button onClick={() => {
+          fetch('board')
+            .then(board => {
+              let ret = noai.randomTry(board, 512);
+              this.setState({board: ret.board});
+            });
+        }}>Random Try</button></div>
       </div>
     );
   }
