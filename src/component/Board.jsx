@@ -37,11 +37,14 @@ class Board extends React.Component {
           key={`${i}-${j}`}
           value={this.state.board[i][j]}
           hitable={Game.hitValid(this.state.board, i, j)}
-          onClick={() => this.setState(Game.hitAt(this.state.board, i, j))} />
+          onClick={() => this.setState(Game.hitAt(this.state.board, i, j))}
+          x={j}
+          y={i}/>
         );
       }
       board.push(<div style={style.row} key={`row-${i}`}>{line}</div>);
     }
+
     return (
       <div>
         <div style={style.table}>{board}</div>

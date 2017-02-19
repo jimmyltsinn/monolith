@@ -7,44 +7,27 @@ html, body {
   overflow-y: auto;
 }
 
-.zero {
-  background: black
-}
-.one {
-  background: lightgrey
-}
-.two {
-  background: pink
-}
-.three {
-  background: orange
-}
-.four {
-  background: lightblue
-}
-
 .cell {
   border: 5px transparent;
   position: relative;
+  transition: 500ms;
 }
 
 .hitable::before,
 .hitable::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-color: transparent;
-    border-style: solid;
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-color: transparent;
+  border-style: solid;
 }
 
 .hitable::after {
-    border-width: 8px;
-    border-right-color: #F00;
-    border-top-color: #F00;
+  border-width: 8px;
+  border-right-color: #F00;
+  border-top-color: #F00;
 }
-
- }
 
 </style>
 

@@ -1,6 +1,7 @@
 import React from 'react';
+import AnimateOnChange from 'react-animate-on-change';
 
-const style = {
+const cellStyle = {
   display: 'table-cell',
   width: '50px',
   height: '50px',
@@ -8,28 +9,42 @@ const style = {
   lineHeight: '50px',
 };
 
-const Cell = (props) => {
-  let className = ['cell'];
-  switch (props.value) {
-    case 0: className.push('zero'); break;
-    case 1: className.push('one'); break;
-    case 2: className.push('two'); break;
-    case 3: className.push('three'); break;
-    case 4: className.push('four'); break;
+class Cell extends React.Component {
+  getBackgroundColor(value) {
+    switch (value) {
+      case 0: return 'black';
+      case 1: return 'lightgrey';
+      case 2: return 'pink';
+      case 3: return 'orange';
+      case 4: return 'lightblue';
+      default: return '';
+    }
   }
 
-  if (props.hitable) className.push('hitable');
+  render() {
+    let className = ['cell'];
+    const style = Object.assign({}, cellStyle, {
+      background: this.getBackgroundColor(this.props.value)
+    });
 
-  return (
-    <div
-      style={style}
-      key={`cell-${props.x}-${props.y}`}
-      className={className.join(' ')}
-      onClick={props.onClick}>
-      {props.value}
-    </div>
-  );
-};
+    if (this.props.hitable) className.push('hitable');
+
+    return (
+      <AnimateOnChange
+        baseClassName="cell"
+        animationClassName="cellchange"
+        animate={true}>
+      <div
+        style={style}
+        key={`cell-${this.props.x}-${this.props.y}`}
+        className={className.join(' ')}
+        onClick={this.props.onClick}>
+        {this.props.value}
+      </div>
+    </AnimateOnChange>
+    );
+  }
+}
 
 Cell.propTypes = {
   value: React.PropTypes.number.isRequired,

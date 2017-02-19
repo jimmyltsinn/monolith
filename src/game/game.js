@@ -19,7 +19,6 @@ export let hitValid = (board, y, x) => {
 };
 
 export let hitAt = (inBoard, y, x) => {
-  console.log("Hit at", x, y);
   let board = Object.assign({}, inBoard);
 
   if (!hitValid(board, y, x)) return board;
@@ -55,7 +54,7 @@ export let hitAt = (inBoard, y, x) => {
 
   for (let pos of updateList) {
     board[pos.y][pos.x]++;
-    if (board[pos.y][pos.x] > 4) board[pos.y][pos.x] = 1;
+    if (board[pos.y][pos.x] > config.type) board[pos.y][pos.x] = 1;
   }
 
   return board;
